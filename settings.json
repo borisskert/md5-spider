@@ -1,5 +1,13 @@
 {
   "url": "https://www.google.com/",
   "check_interval": 10,
-  "db_file": ".db.json"
+  "db_file": ".db.json",
+  "recipients": [],
+  "smtp": {
+    "server": "smtp.gmail.com",
+    "port": 587,
+    "from": null,
+    "username": null,
+    "password": null
+  }
 }
