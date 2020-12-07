@@ -1,3 +1,5 @@
+const spider = require('./src/spider');
+
 (function () {
-    console.log('It works!')
+    spider().then(md5 => console.log(md5));
 })();
