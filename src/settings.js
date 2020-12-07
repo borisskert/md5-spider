@@ -2,20 +2,9 @@ const fs = require('fs');
 
 const filename = 'settings.json';
 
-const readAsPromise = (filename) => {
-    return new Promise((resolve, reject) => {
-        fs.readFile(filename, 'utf8', (error, data) => {
-            if(error) {
-                reject(error);
-            } else {
-                resolve(data);
-            }
-        });
-    });
-}
-
-const read = async () => {
-    const content = await readAsPromise(filename);
+const read = () => {
+    const buffer = fs.readFileSync(filename);
+    const content = buffer.toString('utf-8');
     return JSON.parse(content);
 }
 

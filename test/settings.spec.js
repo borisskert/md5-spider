@@ -1,12 +1,13 @@
 const settings = require("../src/settings");
 
 describe('settings.js', () => {
-    it('should read settings from json', async () => {
+    it('should read settings from json', () => {
         const expected = {
             url: 'https://www.google.com/',
-            check_interval: 10
+            check_interval: 10,
+            db_file: '.db.json',
         };
 
-        expect(await settings.read()).toEqual(expected)
+        expect(settings.read()).toEqual(expected)
     });
 });
