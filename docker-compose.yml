@@ -1,0 +1,8 @@
+version: '3'
+services:
+  md5spider:
+    image: local/md5spider:latest
+    build: .
+    volumes:
+    - ./settings.json:/settings.json:ro
+    - ./.db:/var/local/md5spider:rw
