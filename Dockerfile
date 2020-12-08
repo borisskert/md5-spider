@@ -1,5 +1,8 @@
-FROM node:14
+FROM node:14-alpine
+
 WORKDIR /usr/local/src
+
+RUN apk add --no-cache --update bash
 
 COPY . .
 
