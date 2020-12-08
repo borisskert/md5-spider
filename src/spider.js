@@ -10,7 +10,7 @@ const spider = () => {
 
     const checkSite = async () => {
         const content = await get(url);
-        const newChecksum = checksum(content);
+        const newChecksum = checksum(content.trim());
 
         const existingChecksum = store.read(url);
 
@@ -29,6 +29,7 @@ const spider = () => {
         }
         else if (existingChecksum !== newChecksum) {
             store.write(url, newChecksum);
+            console.log(`Checksum for ${url} changed: ${existingChecksum} => ${newChecksum}`);
 
             send('Site updated!', `Checksum for ${url} changed: ${existingChecksum} => ${newChecksum}`)
         } else {
