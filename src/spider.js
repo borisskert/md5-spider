@@ -3,6 +3,7 @@ const get = require('./get');
 const checksum = require('./checksum');
 const store = require('./store')
 const send = require("./send");
+const cleanup = require("./cleanup");
 
 const spider = async () => {
     const settings = readSettings.read();
@@ -25,10 +26,11 @@ const spider = async () => {
 
     const checkSite = async () => {
         const content = await get(url);
-        const newChecksum = checksum(content.trim());
+        const cleanedContent = cleanup(content).trim();
+        const newChecksum = checksum(cleanedContent);
 
         const existingSite = store.read(url);
-        const newSite = extendSite(existingSite, newChecksum, content)
+        const newSite = extendSite(existingSite, newChecksum, cleanedContent)
 
         return {
             newSite,
@@ -43,16 +45,16 @@ const spider = async () => {
         const newChecksum = newSite.checksum;
 
         if(!(existingChecksum)) {
-            console.log(`Checksum for ${url} created: ${newChecksum}`);
+            console.log(`${new Date().toISOString()} Checksum for ${url} created: ${newChecksum}`);
             store.write(url, newSite);
         }
         else if (existingChecksum !== newChecksum) {
             store.write(url, newSite);
-            console.log(`Checksum for ${url} changed: ${existingChecksum} => ${newChecksum}`);
+            console.log(`${new Date().toISOString()} Checksum for ${url} changed: ${existingChecksum} => ${newChecksum}`);
 
             send('Site updated!', `Checksum for ${url} changed: ${existingChecksum} => ${newChecksum}`)
         } else {
-            console.log(`Checksum for ${url} unchanged: ${existingChecksum}`);
+            console.log(`${new Date().toISOString()} Checksum for ${url} unchanged: ${existingChecksum}`);
         }
     }
 

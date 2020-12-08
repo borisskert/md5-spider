@@ -1,6 +1,7 @@
 {
   "url": "https://www.google.com/",
   "check_interval": 10,
+  "ignores": [],
   "db_file": "/var/local/md5spider/db.json",
   "recipients": [],
   "smtp": {

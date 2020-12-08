@@ -8,6 +8,9 @@ A javascript website md5 change detector.
 {
   "url": "<your site>",
   "check_interval": 10,
+  "ignores": [
+    "<script[A-Za-z0-9\" :/\\.=\\-\\|\\n\\*\\!;\\/\\_\\s\\[\\]{}]*>([A-Za-z0-9\" :/\\.=\\-\\|\\n\\*\\!;\\/\\_\\s\\[\\]{}]+(<!\\[CDATA\\[)[A-Za-z0-9\" :/\\.=\\-\\|\\n\\*\\!;\\/\\_\\s\\[\\]{}<>]+(\\]\\{}]+>)?[A-Za-z0-9\" :/\\.=\\-\\|\\n\\*\\!;\\/\\_\\s\\[\\]{}]+)?<\\/script>"
+  ],
   "db_file": "/var/local/md5spider/db.json",
   "recipients": [
     "your recipients"
@@ -45,3 +48,7 @@ services:
     - ./settings.json:/settings.json:ro
     - ./.db:/var/local/md5spider:rw
 ```
+
+## Links
+
+* [md5-spider @ hub.docker.com](https://hub.docker.com/repository/docker/borisskert/md5spider)
