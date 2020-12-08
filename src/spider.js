@@ -8,8 +8,8 @@ const spider = () => {
     const settings = readSettings.read();
     const url = settings.url;
 
-    const checkSite = () => {
-        const content = get(url);
+    const checkSite = async () => {
+        const content = await get(url);
         const newChecksum = checksum(content);
 
         const existingChecksum = store.read(url);
@@ -20,8 +20,8 @@ const spider = () => {
         }
     }
 
-    const check = () => {
-        const {newChecksum, existingChecksum} = checkSite();
+    const check = async () => {
+        const {newChecksum, existingChecksum} = await checkSite();
 
         if(!(existingChecksum)) {
             console.log(`Checksum for ${url} created: ${newChecksum}`);
@@ -38,8 +38,8 @@ const spider = () => {
 
     check();
 
-    setInterval(() =>{
-        check();
+    setInterval(async () =>{
+        await check();
     }, settings.check_interval * 1000);
 }
 

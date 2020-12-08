@@ -5,9 +5,9 @@ describe('settings.js', () => {
         const expected = {
             url: 'https://www.google.com/',
             check_interval: 10,
-            db_file: '.db.json',
+            db_file: '/var/local/md5spider/db.json',
         };
 
-        expect(settings.read()).toEqual(expected)
+        expect(settings.read()).toMatchObject(expected)
     });
 });
